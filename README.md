@@ -81,7 +81,7 @@ python python_eda/eda_analysis.py
 
 ---
 
-## Key Design Decisions (locked in upfront)
+## Key Design Decisions 
 
 ### ERP / SAP Mapping
 | This project      | ERP / SAP equivalent |
