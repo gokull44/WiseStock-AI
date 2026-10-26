@@ -5,6 +5,8 @@ An end-to-end data analytics project for a retail/e-commerce business that strug
 and supplier data to quantify *where* and *why* inventory problems happen, estimate their
 **financial impact**, and generate **replenishment recommendations**.
 
+Data model mirrors ERP inventory entities (materials, stock, vendors, purchase orders) and the dashboard is structured so it can be rebuilt in SAP Analytics Cloud.
+
 Delivered as: a relational **MySQL** database → **SQL** analysis → **Python** EDA →
 **Power BI** dashboard.
 
@@ -21,32 +23,32 @@ Delivered as: a relational **MySQL** database → **SQL** analysis → **Python*
 
 ```
 inventory-intelligence-system/
-├── README.md                          <- you are here
-├── requirements.txt                   <- Python dependencies
+├── README.md                          
+├── requirements.txt                   
 ├── .gitignore
 ├── database/
-│   ├── schema.sql                     <- MySQL DDL (5-table star-ish schema)
-│   └── load_data.sql                  <- LOAD DATA INFILE scripts for the CSVs
+│   ├── schema.sql                     
+│   └── load_data.sql                 
 ├── data_generation/
-│   └── generate_synthetic_data.py     <- generates realistic, pattern-embedded data
-├── data/                              <- generated CSVs land here (git-ignored by default)
+│   └── generate_synthetic_data.py     
+├── data/                              
 │   ├── products.csv
 │   ├── suppliers.csv
 │   ├── purchase_orders.csv
 │   ├── sales.csv
 │   └── inventory.csv
-├── sql_analysis/                      <- the 5 "showcase" queries
+├── sql_analysis/                     
 │   ├── 01_rolling_demand.sql
 │   ├── 02_reorder_point_status.sql
 │   ├── 03_supplier_on_time_ranking.sql
 │   ├── 04_top_stockout_days.sql
 │   └── 05_consistent_demand_growth.sql
 ├── python_eda/
-│   └── eda_analysis.py                <- data quality checks, EDA, reorder-formula validation
+│   └── eda_analysis.py                
 ├── powerbi/
-│   └── README.md                      <- how to build the 4-page dashboard from this data
+│   └── README.md                      
 └── docs/
-    ├── reorder_point_methodology.md   <- the Z / safety-stock write-up
+    ├── reorder_point_methodology.md   
     ├── limitations.md
     └── business_findings_template.md
 ```
@@ -57,7 +59,7 @@ inventory-intelligence-system/
 
 ```bash
 # 1. Set up environment
-python -m venv venv && source venv/bin/activate      # or venv\Scripts\activate on Windows
+python -m venv venv && source venv/bin/activate      
 pip install -r requirements.txt
 
 # 2. Generate the synthetic (but pattern-embedded, defensible) dataset
@@ -80,6 +82,15 @@ python python_eda/eda_analysis.py
 ---
 
 ## Key Design Decisions (locked in upfront)
+
+### ERP / SAP Mapping
+| This project      | ERP / SAP equivalent |
+|-------------------|----------------------|
+| products          | Material master      |
+| inventory         | Stock                |
+| suppliers         | Vendors              |
+| purchase_orders   | Purchase orders      |
+| sales             | Sales orders         |
 
 ### Reorder Point Formula
 ```
